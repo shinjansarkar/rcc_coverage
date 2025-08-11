@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent } from '@/components/ui/card';
-import { FolderIcon, Plus, Trash2, Eye, EyeOff } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent } from "@/components/ui/card";
+import { FolderIcon, Plus, Trash2, Eye, EyeOff } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface Event {
   id: string;
@@ -21,50 +27,63 @@ interface AcademicYear {
 
 export default function Index() {
   const [isAdmin, setIsAdmin] = useState(false);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [academicYears, setAcademicYears] = useState<AcademicYear[]>([]);
   const [selectedYear, setSelectedYear] = useState<string | null>(null);
-  const [newYearName, setNewYearName] = useState('');
-  const [newEventName, setNewEventName] = useState('');
-  const [newEventLink, setNewEventLink] = useState('');
+  const [newYearName, setNewYearName] = useState("");
+  const [newEventName, setNewEventName] = useState("");
+  const [newEventLink, setNewEventLink] = useState("");
   const [isAddingYear, setIsAddingYear] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
 
   // Load data from localStorage
   useEffect(() => {
-    const savedData = localStorage.getItem('rcc-coverage-data');
+    const savedData = localStorage.getItem("rcc-coverage-data");
     if (savedData) {
       setAcademicYears(JSON.parse(savedData));
     } else {
       // Initialize with sample data
       const sampleData: AcademicYear[] = [
         {
-          id: '1',
-          name: '2023-2024',
+          id: "1",
+          name: "2023-2024",
           events: [
-            { id: '1', name: 'Annual Sports Day', driveLink: 'https://drive.google.com/sample1' },
-            { id: '2', name: 'Cultural Festival', driveLink: 'https://drive.google.com/sample2' },
-            { id: '3', name: 'Graduation Ceremony', driveLink: 'https://drive.google.com/sample3' }
-          ]
-        }
+            {
+              id: "1",
+              name: "Annual Sports Day",
+              driveLink: "https://drive.google.com/sample1",
+            },
+            {
+              id: "2",
+              name: "Cultural Festival",
+              driveLink: "https://drive.google.com/sample2",
+            },
+            {
+              id: "3",
+              name: "Graduation Ceremony",
+              driveLink: "https://drive.google.com/sample3",
+            },
+          ],
+        },
       ];
       setAcademicYears(sampleData);
-      localStorage.setItem('rcc-coverage-data', JSON.stringify(sampleData));
+      localStorage.setItem("rcc-coverage-data", JSON.stringify(sampleData));
     }
   }, []);
 
   // Save data to localStorage whenever academicYears changes
   useEffect(() => {
-    localStorage.setItem('rcc-coverage-data', JSON.stringify(academicYears));
+    localStorage.setItem("rcc-coverage-data", JSON.stringify(academicYears));
   }, [academicYears]);
 
   const handleAdminLogin = () => {
-    if (password === 'admin123') { // Simple password - in real app would be more secure
+    if (password === "admin123") {
+      // Simple password - in real app would be more secure
       setIsAdmin(true);
-      setPassword('');
+      setPassword("");
     } else {
-      alert('Incorrect password!');
+      alert("Incorrect password!");
     }
   };
 
@@ -78,17 +97,21 @@ export default function Index() {
       const newYear: AcademicYear = {
         id: Date.now().toString(),
         name: newYearName.trim(),
-        events: []
+        events: [],
       };
       setAcademicYears([...academicYears, newYear]);
-      setNewYearName('');
+      setNewYearName("");
       setIsAddingYear(false);
     }
   };
 
   const deleteAcademicYear = (yearId: string) => {
-    if (confirm('Are you sure you want to delete this academic year and all its events?')) {
-      setAcademicYears(academicYears.filter(year => year.id !== yearId));
+    if (
+      confirm(
+        "Are you sure you want to delete this academic year and all its events?",
+      )
+    ) {
+      setAcademicYears(academicYears.filter((year) => year.id !== yearId));
       if (selectedYear === yearId) {
         setSelectedYear(null);
       }
@@ -100,32 +123,41 @@ export default function Index() {
       const newEvent: Event = {
         id: Date.now().toString(),
         name: newEventName.trim(),
-        driveLink: newEventLink.trim()
+        driveLink: newEventLink.trim(),
       };
-      
-      setAcademicYears(academicYears.map(year => 
-        year.id === selectedYear 
-          ? { ...year, events: [...year.events, newEvent] }
-          : year
-      ));
-      
-      setNewEventName('');
-      setNewEventLink('');
+
+      setAcademicYears(
+        academicYears.map((year) =>
+          year.id === selectedYear
+            ? { ...year, events: [...year.events, newEvent] }
+            : year,
+        ),
+      );
+
+      setNewEventName("");
+      setNewEventLink("");
       setIsAddingEvent(false);
     }
   };
 
   const deleteEvent = (yearId: string, eventId: string) => {
-    if (confirm('Are you sure you want to delete this event?')) {
-      setAcademicYears(academicYears.map(year => 
-        year.id === yearId 
-          ? { ...year, events: year.events.filter(event => event.id !== eventId) }
-          : year
-      ));
+    if (confirm("Are you sure you want to delete this event?")) {
+      setAcademicYears(
+        academicYears.map((year) =>
+          year.id === yearId
+            ? {
+                ...year,
+                events: year.events.filter((event) => event.id !== eventId),
+              }
+            : year,
+        ),
+      );
     }
   };
 
-  const selectedYearData = academicYears.find(year => year.id === selectedYear);
+  const selectedYearData = academicYears.find(
+    (year) => year.id === selectedYear,
+  );
 
   return (
     <div className="min-h-screen bg-background">
@@ -138,18 +170,22 @@ export default function Index() {
                 <FolderIcon className="w-7 h-7 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">RCC Coverage Team</h1>
-                <p className="text-sm text-gray-600">Event Documentation & Media Management</p>
+                <h1 className="text-2xl font-bold text-gray-900">
+                  RCC Coverage Team
+                </h1>
+                <p className="text-sm text-gray-600">
+                  Event Documentation & Media Management
+                </p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-3">
               {isAdmin && (
                 <Button variant="outline" onClick={handleAdminLogout}>
                   Logout Admin
                 </Button>
               )}
-              
+
               {!isAdmin ? (
                 <Dialog>
                   <DialogTrigger asChild>
@@ -168,7 +204,9 @@ export default function Index() {
                             type={showPassword ? "text" : "password"}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && handleAdminLogin()}
+                            onKeyPress={(e) =>
+                              e.key === "Enter" && handleAdminLogin()
+                            }
                             placeholder="Enter admin password"
                           />
                           <Button
@@ -208,7 +246,9 @@ export default function Index() {
           /* Academic Years View */
           <div>
             <div className="flex justify-between items-center mb-6">
-              <h2 className="text-3xl font-bold text-gray-900">Academic Years</h2>
+              <h2 className="text-3xl font-bold text-gray-900">
+                Academic Years
+              </h2>
               {isAdmin && (
                 <Button onClick={() => setIsAddingYear(true)}>
                   <Plus className="w-4 h-4 mr-2" />
@@ -219,8 +259,8 @@ export default function Index() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {academicYears.map((year) => (
-                <Card 
-                  key={year.id} 
+                <Card
+                  key={year.id}
                   className="cursor-pointer hover:shadow-lg transition-shadow duration-200 group"
                   onClick={() => setSelectedYear(year.id)}
                 >
@@ -243,9 +283,13 @@ export default function Index() {
                         </Button>
                       )}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{year.name}</h3>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                      {year.name}
+                    </h3>
                     <p className="text-sm text-gray-600 mb-1">Academic Year</p>
-                    <p className="text-sm text-primary font-medium">{year.events.length} events</p>
+                    <p className="text-sm text-primary font-medium">
+                      {year.events.length} events
+                    </p>
                   </CardContent>
                 </Card>
               ))}
@@ -265,16 +309,17 @@ export default function Index() {
                       value={newYearName}
                       onChange={(e) => setNewYearName(e.target.value)}
                       placeholder="e.g., 2024-2025"
-                      onKeyPress={(e) => e.key === 'Enter' && addAcademicYear()}
+                      onKeyPress={(e) => e.key === "Enter" && addAcademicYear()}
                     />
                   </div>
                   <div className="flex justify-end space-x-2">
-                    <Button variant="outline" onClick={() => setIsAddingYear(false)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setIsAddingYear(false)}
+                    >
                       Cancel
                     </Button>
-                    <Button onClick={addAcademicYear}>
-                      Add Year
-                    </Button>
+                    <Button onClick={addAcademicYear}>Add Year</Button>
                   </div>
                 </div>
               </DialogContent>
@@ -285,7 +330,9 @@ export default function Index() {
           <div>
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">{selectedYearData?.name}</h2>
+                <h2 className="text-3xl font-bold text-gray-900">
+                  {selectedYearData?.name}
+                </h2>
                 <p className="text-gray-600">Events and Documentation</p>
               </div>
               {isAdmin && (
@@ -298,7 +345,10 @@ export default function Index() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {selectedYearData?.events.map((event) => (
-                <Card key={event.id} className="hover:shadow-lg transition-shadow duration-200 group">
+                <Card
+                  key={event.id}
+                  className="hover:shadow-lg transition-shadow duration-200 group"
+                >
                   <CardContent className="p-6">
                     <div className="flex justify-between items-start mb-4">
                       <div className="w-12 h-12 bg-accent rounded-lg flex items-center justify-center">
@@ -315,11 +365,13 @@ export default function Index() {
                         </Button>
                       )}
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-3">{event.name}</h3>
-                    <Button 
-                      variant="outline" 
+                    <h3 className="text-lg font-semibold text-gray-900 mb-3">
+                      {event.name}
+                    </h3>
+                    <Button
+                      variant="outline"
                       size="sm"
-                      onClick={() => window.open(event.driveLink, '_blank')}
+                      onClick={() => window.open(event.driveLink, "_blank")}
                       className="w-full"
                     >
                       View Documentation
@@ -332,9 +384,13 @@ export default function Index() {
             {selectedYearData?.events.length === 0 && (
               <div className="text-center py-12">
                 <FolderIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <h3 className="text-lg font-medium text-gray-900 mb-2">No events yet</h3>
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  No events yet
+                </h3>
                 <p className="text-gray-600">
-                  {isAdmin ? "Add your first event to get started." : "Events will appear here once added by admin."}
+                  {isAdmin
+                    ? "Add your first event to get started."
+                    : "Events will appear here once added by admin."}
                 </p>
               </div>
             )}
@@ -365,12 +421,13 @@ export default function Index() {
                     />
                   </div>
                   <div className="flex justify-end space-x-2">
-                    <Button variant="outline" onClick={() => setIsAddingEvent(false)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setIsAddingEvent(false)}
+                    >
                       Cancel
                     </Button>
-                    <Button onClick={addEvent}>
-                      Add Event
-                    </Button>
+                    <Button onClick={addEvent}>Add Event</Button>
                   </div>
                 </div>
               </DialogContent>
