@@ -520,23 +520,23 @@ export default function Index() {
         ) : !selectedEvent ? (
           /* Events View */
           <div>
-            <div className="flex items-center mb-4">
+            <div className="flex items-center mb-6">
               <Button
                 onClick={() => setSelectedYear(null)}
                 variant="ghost"
                 size="sm"
-                className="mr-3 text-gray-600 hover:text-gray-900"
+                className="mr-4 text-muted-foreground hover:text-foreground bg-white/50 hover:bg-white shadow-sm border border-gray-200/50 rounded-xl px-4 py-2"
               >
-                <ArrowLeft className="w-4 h-4 mr-1" />
+                <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Academic Years
               </Button>
             </div>
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-between items-center mb-8">
               <div>
-                <h2 className="text-3xl font-bold text-gray-900">
+                <h2 className="text-4xl font-bold text-gray-900 mb-2">
                   {selectedYearData?.name}
                 </h2>
-                <p className="text-gray-600">Events and Documentation</p>
+                <p className="text-lg text-muted-foreground">Events and Documentation</p>
               </div>
               {isAdmin && (
                 <Button onClick={() => setIsAddingEvent(true)}>
