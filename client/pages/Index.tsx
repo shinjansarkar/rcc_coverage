@@ -137,11 +137,12 @@ export default function Index() {
   }, [academicYears]);
 
   const handleAdminLogin = () => {
-    if (password === "admin123") {
+    if (email === "admin@rcc.com" && password === "admin123") {
       setIsAdmin(true);
+      setEmail("");
       setPassword("");
     } else {
-      alert("Incorrect password!");
+      alert("Incorrect email or password!");
     }
   };
 
