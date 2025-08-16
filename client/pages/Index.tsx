@@ -38,6 +38,7 @@ export default function Index() {
   const [newEventLink, setNewEventLink] = useState('');
   const [newSubEventName, setNewSubEventName] = useState('');
   const [newSubEventLink, setNewSubEventLink] = useState('');
+  const [eventType, setEventType] = useState<'single' | 'multiple'>('single');
   const [isAddingYear, setIsAddingYear] = useState(false);
   const [isAddingEvent, setIsAddingEvent] = useState(false);
   const [isAddingSubEvent, setIsAddingSubEvent] = useState(false);
