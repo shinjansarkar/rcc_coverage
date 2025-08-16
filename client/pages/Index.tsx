@@ -339,7 +339,9 @@ export default function Index() {
               {!isAdmin ? (
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button>Admin Access</Button>
+                    <Button className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 shadow-lg hover:shadow-xl transition-all duration-200 px-6">
+                      Admin Access
+                    </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-md">
                     <DialogHeader>
