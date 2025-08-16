@@ -493,18 +493,61 @@ export default function Index() {
                       placeholder="e.g., Techtricx"
                     />
                   </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="driveLink">Google Drive Link (Optional)</Label>
-                    <Input
-                      id="driveLink"
-                      value={newEventLink}
-                      onChange={(e) => setNewEventLink(e.target.value)}
-                      placeholder="https://drive.google.com/... (leave empty if event has sub-events)"
-                    />
-                    <p className="text-xs text-gray-500">
-                      Leave empty if this event will contain multiple sub-events
-                    </p>
+
+                  <div className="space-y-3">
+                    <Label>Event Type</Label>
+                    <div className="flex space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id="single-event"
+                          name="eventType"
+                          value="single"
+                          checked={eventType === 'single'}
+                          onChange={(e) => setEventType(e.target.value as 'single' | 'multiple')}
+                          className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                        />
+                        <Label htmlFor="single-event" className="text-sm font-normal cursor-pointer">
+                          Single Event
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <input
+                          type="radio"
+                          id="multiple-events"
+                          name="eventType"
+                          value="multiple"
+                          checked={eventType === 'multiple'}
+                          onChange={(e) => setEventType(e.target.value as 'single' | 'multiple')}
+                          className="w-4 h-4 text-primary border-gray-300 focus:ring-primary"
+                        />
+                        <Label htmlFor="multiple-events" className="text-sm font-normal cursor-pointer">
+                          Multiple Events
+                        </Label>
+                      </div>
+                    </div>
                   </div>
+
+                  {eventType === 'single' && (
+                    <div className="space-y-2">
+                      <Label htmlFor="driveLink">Google Drive Link</Label>
+                      <Input
+                        id="driveLink"
+                        value={newEventLink}
+                        onChange={(e) => setNewEventLink(e.target.value)}
+                        placeholder="https://drive.google.com/..."
+                      />
+                    </div>
+                  )}
+
+                  {eventType === 'multiple' && (
+                    <div className="p-3 bg-blue-50 rounded-lg border border-blue-200">
+                      <p className="text-sm text-blue-800">
+                        📁 This will create a folder that can contain multiple sub-events. You can add sub-events after creating this event.
+                      </p>
+                    </div>
+                  )}
+
                   <div className="flex justify-end space-x-2">
                     <Button variant="outline" onClick={() => setIsAddingEvent(false)}>
                       Cancel
