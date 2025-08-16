@@ -212,13 +212,14 @@ export default function Index() {
   const selectedEventData = selectedYearData?.events.find(event => event.id === selectedEvent);
 
   const getEventDisplayInfo = (event: Event) => {
-    const hasSubEvents = event.subEvents.length > 0;
+    const subEvents = event.subEvents || [];
+    const hasSubEvents = subEvents.length > 0;
     const hasMainLink = !!event.driveLink;
-    
+
     if (hasSubEvents && hasMainLink) {
-      return `${event.subEvents.length + 1} items`; // sub-events + main event
+      return `${subEvents.length + 1} items`; // sub-events + main event
     } else if (hasSubEvents) {
-      return `${event.subEvents.length} sub-events`;
+      return `${subEvents.length} sub-events`;
     } else {
       return 'Single event';
     }
