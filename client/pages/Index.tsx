@@ -137,18 +137,19 @@ export default function Index() {
       const newEvent: Event = {
         id: Date.now().toString(),
         name: newEventName.trim(),
-        driveLink: newEventLink.trim() || undefined,
+        driveLink: eventType === 'single' ? (newEventLink.trim() || undefined) : undefined,
         subEvents: []
       };
-      
-      setAcademicYears(academicYears.map(year => 
-        year.id === selectedYear 
+
+      setAcademicYears(academicYears.map(year =>
+        year.id === selectedYear
           ? { ...year, events: [...year.events, newEvent] }
           : year
       ));
-      
+
       setNewEventName('');
       setNewEventLink('');
+      setEventType('single');
       setIsAddingEvent(false);
     }
   };
