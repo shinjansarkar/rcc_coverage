@@ -86,45 +86,6 @@ export default function Index() {
     setAcademicYears(sampleData);
     localStorage.setItem('rcc-coverage-data', JSON.stringify(sampleData));
 
-    const savedData = localStorage.getItem('rcc-coverage-data');
-    if (false) { // Disabled for now to ensure fresh data
-      // Initialize with sample data including nested structure
-      const sampleData: AcademicYear[] = [
-        {
-          id: '1',
-          name: '2023-2024',
-          events: [
-            {
-              id: '1',
-              name: 'Techtricx',
-              subEvents: [
-                { id: '1', name: 'Robo Rash', driveLink: 'https://drive.google.com/robo-rash' },
-                { id: '2', name: 'Robo Soccer', driveLink: 'https://drive.google.com/robo-soccer' },
-                { id: '3', name: 'Minds Eye', driveLink: 'https://drive.google.com/minds-eye' },
-                { id: '4', name: 'E Football', driveLink: 'https://drive.google.com/e-football' },
-                { id: '5', name: 'PUBG', driveLink: 'https://drive.google.com/pubg' }
-              ]
-            },
-            {
-              id: '2',
-              name: 'Cultural Festival',
-              driveLink: 'https://drive.google.com/cultural-fest',
-              subEvents: []
-            },
-            {
-              id: '3',
-              name: 'Annual Sports Day',
-              subEvents: [
-                { id: '1', name: 'Cricket Tournament', driveLink: 'https://drive.google.com/cricket' },
-                { id: '2', name: 'Football Championship', driveLink: 'https://drive.google.com/football' }
-              ]
-            }
-          ]
-        }
-      ];
-      setAcademicYears(sampleData);
-      localStorage.setItem('rcc-coverage-data', JSON.stringify(sampleData));
-    }
   }, []);
 
   // Save data to localStorage whenever academicYears changes
