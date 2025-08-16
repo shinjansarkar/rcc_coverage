@@ -526,6 +526,17 @@ export default function Index() {
         ) : (
           /* Sub-Events View */
           <div>
+            <div className="flex items-center mb-4">
+              <Button
+                onClick={() => setSelectedEvent(null)}
+                variant="ghost"
+                size="sm"
+                className="mr-3 text-gray-600 hover:text-gray-900"
+              >
+                <ArrowLeft className="w-4 h-4 mr-1" />
+                Back to Events
+              </Button>
+            </div>
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h2 className="text-3xl font-bold text-gray-900">{selectedEventData?.name}</h2>
