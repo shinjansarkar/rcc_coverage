@@ -470,13 +470,18 @@ export default function Index() {
                         </Button>
                       )}
                     </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
                       {year.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-1">Academic Year</p>
-                    <p className="text-sm text-primary font-medium">
-                      {year.events.length} events
-                    </p>
+                    <p className="text-sm text-muted-foreground mb-2 font-medium">Academic Year</p>
+                    <div className="flex items-center justify-between">
+                      <p className="text-sm text-primary font-semibold bg-primary/10 px-3 py-1 rounded-full">
+                        {year.events.length} events
+                      </p>
+                      <div className="text-gray-400 group-hover:text-primary transition-colors">
+                        →
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               ))}
