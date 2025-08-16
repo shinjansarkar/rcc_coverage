@@ -347,6 +347,16 @@ export default function Index() {
                     </DialogHeader>
                     <div className="space-y-4">
                       <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter admin email"
+                        />
+                      </div>
+                      <div className="space-y-2">
                         <Label htmlFor="password">Password</Label>
                         <div className="relative">
                           <Input
