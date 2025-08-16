@@ -312,18 +312,18 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white shadow-sm border-b">
+      <div className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-gray-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center">
-                <FolderIcon className="w-7 h-7 text-white" />
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center space-x-4">
+              <div className="w-14 h-14 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
+                <FolderIcon className="w-8 h-8 text-white" />
               </div>
               <div>
-                <h1 className="text-2xl font-bold text-gray-900">
+                <h1 className="text-3xl font-bold text-gradient bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                   RCC Coverage Team
                 </h1>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground font-medium">
                   Event Documentation & Media Management
                 </p>
               </div>
