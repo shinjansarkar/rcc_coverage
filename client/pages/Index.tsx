@@ -46,7 +46,16 @@ export default function Index() {
   useEffect(() => {
     const savedData = localStorage.getItem('rcc-coverage-data');
     if (savedData) {
-      setAcademicYears(JSON.parse(savedData));
+      const parsedData = JSON.parse(savedData);
+      // Migrate old data structure to new format
+      const migratedData = parsedData.map((year: AcademicYear) => ({
+        ...year,
+        events: year.events.map((event: any) => ({
+          ...event,
+          subEvents: event.subEvents || []
+        }))
+      }));
+      setAcademicYears(migratedData);
     } else {
       // Initialize with sample data including nested structure
       const sampleData: AcademicYear[] = [
