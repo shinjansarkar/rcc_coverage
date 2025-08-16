@@ -475,7 +475,9 @@ export default function Index() {
                     <h3 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-gray-800 transition-colors">
                       {year.name}
                     </h3>
-                    <p className="text-sm text-muted-foreground mb-2 font-medium">Academic Year</p>
+                    <p className="text-sm text-muted-foreground mb-2 font-medium">
+                      Academic Year
+                    </p>
                     <div className="flex items-center justify-between">
                       <p className="text-sm text-primary font-semibold bg-primary/10 px-3 py-1 rounded-full">
                         {year.events.length} events
@@ -538,7 +540,9 @@ export default function Index() {
                 <h2 className="text-4xl font-bold text-gray-900 mb-2">
                   {selectedYearData?.name}
                 </h2>
-                <p className="text-lg text-muted-foreground">Events and Documentation</p>
+                <p className="text-lg text-muted-foreground">
+                  Events and Documentation
+                </p>
               </div>
               {isAdmin && (
                 <Button onClick={() => setIsAddingEvent(true)}>
