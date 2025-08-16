@@ -420,33 +420,41 @@ export default function Index() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {!selectedYear ? (
           /* Academic Years View */
           <div>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-3xl font-bold text-gray-900">
-                Academic Years
-              </h2>
+            <div className="flex justify-between items-center mb-8">
+              <div>
+                <h2 className="text-4xl font-bold text-gray-900 mb-2">
+                  Academic Years
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  Organize events by academic year
+                </p>
+              </div>
               {isAdmin && (
-                <Button onClick={() => setIsAddingYear(true)}>
+                <Button
+                  onClick={() => setIsAddingYear(true)}
+                  className="bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 shadow-lg hover:shadow-xl transition-all duration-200"
+                >
                   <Plus className="w-4 h-4 mr-2" />
                   Add Year
                 </Button>
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {academicYears.map((year) => (
                 <Card
                   key={year.id}
-                  className="cursor-pointer hover:shadow-lg transition-shadow duration-200 group"
+                  className="cursor-pointer hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group border-0 shadow-lg bg-gradient-to-br from-white to-gray-50/50"
                   onClick={() => setSelectedYear(year.id)}
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-16 h-16 bg-accent rounded-lg flex items-center justify-center group-hover:bg-primary group-hover:text-white transition-colors">
-                        <FolderIcon className="w-8 h-8 text-primary group-hover:text-white" />
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-6">
+                      <div className="w-18 h-18 bg-gradient-to-br from-primary/10 to-blue-600/10 rounded-2xl flex items-center justify-center group-hover:from-primary group-hover:to-blue-600 transition-all duration-300 shadow-lg">
+                        <FolderIcon className="w-10 h-10 text-primary group-hover:text-white transition-colors duration-300" />
                       </div>
                       {isAdmin && (
                         <Button
